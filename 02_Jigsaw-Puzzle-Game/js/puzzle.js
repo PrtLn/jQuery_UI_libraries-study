@@ -103,3 +103,24 @@ function addPuzzleEvents()
 		}
 	});
 }
+
+// Checking for puzzle completion
+function checkIfPuzzleComplete()
+{
+	if($('#puzzleContainer div.pieceDropped').length != 16)
+	{
+		return false;
+	}
+	for(var i = 0; i < 16; i++)
+	{
+		var puzzlePiece = $('#puzzleContainer div.pieceDropped:eq('+i+')');
+		var sequence = parseInt(puzzlePiece.data('sequence'), 10);
+		if(i != sequence)
+		{
+			$('#message').text('Nope! You made sun boy sad :(').show();
+			return false;
+		}
+	}
+	$('#message').text('YaY! sun boy is happy now :)').show();
+	return true;
+}
