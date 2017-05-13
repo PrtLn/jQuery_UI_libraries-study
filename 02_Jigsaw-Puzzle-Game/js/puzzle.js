@@ -1,6 +1,7 @@
 // Creating slices of the image
 var rows = 4;
 var cols = 4;
+
 $(document).ready(function() {
 	var sliceStr = createSlices(true);
 	$('#puzzleContainer').html(sliceStr);
@@ -11,18 +12,19 @@ $(document).ready(function() {
 		var divs = $('#puzzleContainer > div');
 		var allDivs = shuffle(divs);
 		$('pieceBox').empty();
-		allDivs.each(function() {
+		allDivs.each(function() 
+		{
 			var leftDistance = Math.floor((Math.random()*280)) + 'px';
 			var topDistance = Math.floor((Math.random()*280)) + 'px';
 
 			$(this)
-				.addClass('imgDroppable')
+				.addClass('imgDraggable')
 				.css({
 					position : 'absolute',
 					left : leftDistance,
 					top : topDistance
 				});
-				$('#pieceBox').append($(this));
+			$('#pieceBox').append($(this));
 		});
 
 		var sliceStr = createSlices(false);
@@ -30,9 +32,11 @@ $(document).ready(function() {
 
 		$(this).hide();
 		$('#reset').show();
+
+		addPuzzleEvents();
 	});
 });
-
+	
 function createSlices(useImage)
 {
 	var str = '';
@@ -61,3 +65,41 @@ function shuffle(o)
 			j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 };
+
+// Handling events for puzzle pieces
+function addPuzzleEvents() 
+{
+	$('.imgDraggable').draggable(
+	{
+		revert : 'invalid',
+			start : function(event, ui) {
+				var $this = $(this);
+				if($this.hasClass('pieceDropped'))
+			{
+				$this.removeClass('pieceDropped');
+				($this.parent()).removeClass('piecePresent');
+			}
+		}
+	});
+
+	$('.imgDroppable').droppable({
+		hoverClass : "ui-state-highlight",
+		accept : function(draggable)
+		{
+			return !$(this).hasClass('piecePresent');
+		},
+
+		drop : function(event, ui) {
+			var draggable = ui.draggable;
+			var droppedOn = $(this);
+			droppedOn.addClass('piecePresent');
+			$(draggable).detach().addClass('pieceDropped').css({
+				top: 0,
+				left: 0, 
+				position:'relative'
+			}).appendTo(droppedOn);
+			
+			checkIfPuzzleComplete();
+		}
+	});
+}
