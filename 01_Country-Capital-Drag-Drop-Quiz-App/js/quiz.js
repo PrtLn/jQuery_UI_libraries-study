@@ -2,6 +2,15 @@ $(document).ready(function()
 {
 	createQuizLayout();
 	initQuiz();
+
+	// Reseting the quiz
+	$('#reset').on('click', function()
+	{
+		$('#source li').draggable('destroy');
+		$('#target li').droppable('destroy');
+		createQuizLayout();
+		initQuiz();
+	});
 });
 
 function createQuizLayout()
