@@ -35,6 +35,17 @@ $(document).ready(function() {
 
 		addPuzzleEvents();
 	});
+
+	// Resetting the puzzle
+	$('#reset').on('click', function()
+	{
+		var sliceStr = createSlices(true);
+		$('#puzzleContainer').html(sliceStr);
+		$('#pieceBox').empty();
+		$('#message').empty().hide();
+		$(this).hide();
+		$('#start').show();
+	});
 });
 	
 function createSlices(useImage)
