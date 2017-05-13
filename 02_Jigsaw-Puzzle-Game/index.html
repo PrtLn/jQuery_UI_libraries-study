@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Designing a Jigsaw Puzzle</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+
+	<style type="text/css">
+		body {
+			font-family: arial, verdana;
+			font-size: 14px;
+			margin: 15px auto;
+			width: 900px;
+			background: #aaa;
+		}
+
+		div.container {
+			border: 1px solid #000;
+			float: left;
+			margin: 0 auto;
+			padding: 10px;
+			width: 100%;
+			background: #ddd;
+		}
+
+		#pieceBox {
+			border: 1px solid #000;
+			float: left;
+			height: 408px;
+			width: 408px;
+			margin: 0 auto;
+			position: relative;			
+		}
+
+		#puzzleContainer {
+			border: 1px solid #000;
+			float: right;
+			margin: 0 auto;
+			height: 408px;
+			width: 408px;
+		}
+
+		div.img {
+			background-image: url('pig.jpg');
+			background-repeat: no-repeat;
+			height: 100px;
+			width: 100px;
+			float: left;
+			border: 1px solid #000;
+		}
+
+		ul {
+			text-align: center;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		span#message {
+			clear: both;
+			display: none;
+			font-size: 20px;
+			padding: 20px 0;
+			text-align: center;
+			width: 100%;
+		}
+
+		ul.buttons {
+			cursor: pointer;
+			margin-top: 10px
+		}
+
+		ul button {
+			border: 1px solid #000;
+			font-weight: bold;
+			margin: 0 auto;
+			padding: 10px 0;
+			text-align: center;
+			width: 175px;
+			display: inline-block;
+		}
+
+		#reset {
+			display: none;
+		}
+
+		.clear {
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="pieceBox"></div>
+
+		<div id="puzzleContainer"></div>
+
+		<div class="clear">&nbsp;</div>
+		<div class="clear">&nbsp;</div>
+		<span id="message"></span>
+
+		<div class="clear">&nbsp;</div>
+
+		<ul class="buttons">
+			<li><button id="start">Start</button></li>
+			<li><button id="reset">Reset</button></li>
+		</ul>
+	</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/puzzle.js"></script>
+
+</body>
+</html>
