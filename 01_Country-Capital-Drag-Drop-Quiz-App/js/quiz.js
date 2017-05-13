@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
 	createQuizLayout();
+	initQuiz();
 });
 
 function createQuizLayout()
@@ -32,3 +33,13 @@ function shuffle(o)
 			j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 };
+
+function initQuiz()
+{
+	$('#source li').draggable(
+	{
+		revert : true,
+		revertDuration : 200,
+		cursor : "move"
+	});
+}
