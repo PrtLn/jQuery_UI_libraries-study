@@ -34,6 +34,7 @@ function shuffle(o)
 	return o;
 };
 
+// Draggable country names
 function initQuiz()
 {
 	$('#source li').draggable(
@@ -41,5 +42,43 @@ function initQuiz()
 		revert : true,
 		revertDuration : 200,
 		cursor : "move"
+	});
+
+	// Droppable capital names and scoring
+	var totalScore = 0;
+	$('#score').text(totalScore + ' points.');
+	$('#target li').droppable(
+	{
+		accept : function(draggable)
+		{
+			if(parseInt(draggable.data('index'), 10) ===
+				parseInt($(this).data('index'), 10))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		},
+
+		drop : function(event, ui)
+		{
+			var that = $(this);
+			that.addClass("ui-state-highlight").html('Correct!').effect('bounce');
+			that.droppable('disable');
+			ui.draggable.addClass('correct ui-state-error');
+			(ui.draggable).draggable('disable');
+
+			totalScore++;
+			$('#score').text(totalScore + ' points.');
+			if ($('li.correct').length == 10) 
+			{
+				$("#dialog-complete").dialog({
+					resizable : false,
+					modal : true
+				});
+			}
+		}
 	});
 }
